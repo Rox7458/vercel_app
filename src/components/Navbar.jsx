@@ -12,9 +12,9 @@ import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
 
 const navigation = [
-  { name: "DASHBOARD", link: "dashboard", current: true },
-  { name: "NEW BLOG", link: "newblog", current: false },
-  { name: "ABOUT", link: "about", current: false },
+  { name: "DASHBOARD", link: "dashboard" },
+  { name: "NEW BLOG", link: "newblog" },
+  { name: "ABOUT", link: "about" },
 ];
 
 function classNames(...classes) {
@@ -38,18 +38,19 @@ const Navbar = () => {
             </div>
             <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
               <div className="flex shrink-0 items-center">
-                <img
-                  alt="Your Company"
-                  src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500"
-                  className="h-8 w-auto"
-                />
+                <Link to="/">
+                  <img
+                    alt="Your Company"
+                    src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500"
+                    className="h-8 w-auto"
+                  />
+                </Link>
               </div>
               <div className="hidden sm:ml-6 sm:block">
                 <div className="flex space-x-4">
                   {navigation.map((item) => (
                     <Link
                       key={item.name}
-                      aria-current={item.current ? "page" : undefined}
                       className={classNames(
                         item.current ? "bg-gray-900 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white",
                         "rounded-md px-3 py-2 text-sm font-medium"
@@ -98,7 +99,7 @@ const Navbar = () => {
                   </MenuItem>
                   <MenuItem>
                     <Link
-                      to="/logout"
+                      to="/login"
                       className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
                     >
                       Logout
@@ -117,11 +118,8 @@ const Navbar = () => {
                 key={item.name}
                 as="a"
                 href={item.href}
-                aria-current={item.current ? "page" : undefined}
-                className={classNames(
-                  item.current ? "bg-gray-900 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                  "block rounded-md px-3 py-2 text-base font-medium"
-                )}
+                className="text-gray-300 hover:bg-gray-700 hover:text-white
+                  block rounded-md px-3 py-2 text-base font-medium"
               >
                 {item.name}
               </DisclosureButton>

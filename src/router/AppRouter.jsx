@@ -5,7 +5,8 @@ import NewBlog from "../pages/NewBlog";
 import About from "../pages/About";
 import MyBlogs from "../pages/user_pages/MyBlogs";
 import Profile from "../pages/user_pages/Profile";
-import Logout from "../pages/Logout";
+import Login from "../pages/Login";
+import Register from "../pages/Register";
 
 const router = createBrowserRouter([
   {
@@ -37,8 +38,12 @@ const router = createBrowserRouter([
         element: <Profile />,
       },
       {
-        path: "/logout",
-        element: <Logout />,
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/register",
+        element: <Register />,
       },
     ],
   },
