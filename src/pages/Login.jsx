@@ -1,83 +1,76 @@
-import React from "react";
+import Avatar from "@mui/material/Avatar";
+import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
+import LockIcon from "@mui/icons-material/Lock";
+import image from "../assets/hero.png";
 import { Link } from "react-router-dom";
+import AuthHeader from "../components/AuthHeader";
+import AuthImage from "../components/AuthImage";
+import { Formik } from "formik";
+import LoginForm from "../components/LoginForm";
+import * as Yup from "yup";
+import useAuthCall from "../hook/useAuthCall";
 
 const Login = () => {
+  const { login } = useAuthCall();
+
+  const SignupSchema = Yup.object().shape({
+    username: Yup.string()
+      .min(1, "Kullanıcı adı 5 karakterden az olamaz")
+      .max(50, "Kullanıcı adı 50 karakterden fazla olamaz")
+      .required("Kullanıcı adı zorunludur"),
+    password: Yup.string().required("password zorunludur"),
+  });
   return (
-    <div>
-      <>
-        <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-          <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-            <img
-              alt="Your Company"
-              src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
-              className="mx-auto h-10 w-auto"
-            />
-            <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
-              Sign in to your account
-            </h2>
-          </div>
+    <Container maxWidth="lg">
+      <Grid
+        container
+        justifyContent="center"
+        direction="row-reverse"
+        sx={{
+          height: "100vh",
+          p: 2,
+        }}
+      >
+        <AuthHeader />
 
-          <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-            <form action="#" method="POST" className="space-y-6">
-             
+        <Grid item xs={12} sm={10} md={6}>
+          <Avatar
+            sx={{
+              backgroundColor: "secondary.main",
+              m: "auto",
+              width: 40,
+              height: 40,
+            }}
+          >
+            <LockIcon size="30" />
+          </Avatar>
+          <Typography variant="h4" align="center" mb={4} color="secondary.main">
+            SIGN IN
+          </Typography>
 
-             
-              
+          <Formik
+            initialValues={{ username: "", password: "" }}
+            validationSchema={SignupSchema}
+            onSubmit={(values, actions) => {
+              console.log(values);
+              login(values);
+              actions.resetForm();
+              actions.setSubmitting(false);
+            }}
+            component={(props) => <LoginForm {...props} />}
+          />
 
-              <div>
-                <label htmlFor="email" className="block text-sm/6 font-medium text-gray-900">
-                  Email address
-                </label>
-                <div className="mt-2">
-                  <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    required
-                    autoComplete="email"
-                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                  />
-                </div>
-              </div>
+          <Box sx={{ textAlign: "center", mt: 2, color: "secondary.main" }}>
+            <Link to="/register">Don't have an account? Sign Up</Link>
+          </Box>
+        </Grid>
 
-              <div>
-                <div className="flex items-center justify-between">
-                  <label htmlFor="password" className="block text-sm/6 font-medium text-gray-900">
-                    Password
-                  </label>
-                </div>
-                <div className="mt-2">
-                  <input
-                    id="password"
-                    name="password"
-                    type="password"
-                    required
-                    autoComplete="current-password"
-                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <button
-                  type="submit"
-                  className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                >
-                  Sign in
-                </button>
-              </div>
-            </form>
-
-            <p className="mt-10 text-center text-sm/6 text-gray-500">
-              already have a account{" "}
-              <Link to="/register" className="font-semibold text-indigo-600 hover:text-indigo-500">
-                click to register
-              </Link>
-            </p>
-          </div>
-        </div>
-      </>
-    </div>
+        <AuthImage image={image} />
+      </Grid>
+    </Container>
   );
 };
 

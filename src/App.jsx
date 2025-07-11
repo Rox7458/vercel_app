@@ -1,17 +1,32 @@
-import React from "react";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import AppRouter from "./router/AppRouter";
-import ErrorBoundary from "./components/ErrorBoundary";
 import { Provider } from "react-redux";
 import store from "./app/store";
+import { ToastContainer } from "react-toastify";
+import ErrorBoundary from "./components/ErrorBoundary";
 
-const App = () => {
+function App() {
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: "#454F5B",
+      },
+      secondary: {
+        main: "#454F5B",
+        second: "#161C24",
+      },
+    },
+  });
   return (
     <ErrorBoundary>
-      <Provider store={store}>
-        <AppRouter />
-      </Provider>
+      <ThemeProvider theme={theme}>
+        <Provider store={store}>
+          <AppRouter />
+        </Provider>
+        <ToastContainer />
+      </ThemeProvider>
     </ErrorBoundary>
   );
-};
+}
 
 export default App;

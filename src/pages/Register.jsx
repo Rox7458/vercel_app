@@ -1,123 +1,84 @@
+import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
+import Avatar from "@mui/material/Avatar";
+import LockIcon from "@mui/icons-material/Lock";
+import image from "../assets/regi.avif";
+import Grid from "@mui/material/Grid";
 import { Link } from "react-router-dom";
+import { Box, useThemeProps } from "@mui/material";
+import AuthHeader from "../components/AuthHeader";
+import AuthImage from "../components/AuthImage";
+
+import { Formik } from "formik";
+import * as Yup from "yup";
+import RegisterForm from "../components/RegisterForm";
+import useAuthCall from "../hook/useAuthCall";
 
 const Register = () => {
+  const { register } = useAuthCall();
+
+  const registerSchema = Yup.object().shape({
+    username: Yup.string().min(2, "Too short!").max(50, "Too Long!").required("Required"),
+    firstName: Yup.string().min(2, "Too Short!").max(50, "Too Long!").required("Required"),
+    lastName: Yup.string().min(2, "Too Short!").max(50, "Too Long!").required("Required"),
+    email: Yup.string().email("Invalid email").required("Required"),
+    password: Yup.string()
+    .matches(/[a-z]/, "Password should include lowercase"),
+  });
+
   return (
-    <>
-      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          <img
-            alt="Your Company"
-            src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
-            className="mx-auto h-10 w-auto"
+    <Container maxWidth="lg">
+      <Grid
+        container
+        justifyContent="center"
+        direction="row-reverse"
+        rowSpacing={{ sm: 3 }}
+        sx={{
+          height: "100vh",
+          p: 2,
+        }}
+      >
+        <AuthHeader />
+
+        <Grid item xs={12} sm={10} md={6}>
+          <Avatar
+            sx={{
+              backgroundColor: "secondary.light",
+              m: "auto",
+              width: 40,
+              height: 40,
+            }}
+          >
+            <LockIcon size="30" />
+          </Avatar>
+          <Typography variant="h4" align="center" mb={4} color="secondary.light">
+            Register
+          </Typography>
+
+          <Formik
+            initialValues={{
+              username: "",
+              password: "",
+              email: "",
+              firstName: "",
+              lastName: "",
+              image: "",
+              city: "",
+              bio: "",
+            }}
+            validationSchema={registerSchema}
+            onSubmit={(values) => register(values)}
+            component={(props) => <RegisterForm {...props} />}
           />
-          <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
-            Sign up
-          </h2>
-        </div>
 
-        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form action="#" method="POST" className="space-y-6">
-            <div>
-              <label htmlFor="email" className="block text-sm/6 font-medium text-gray-900">
-                Email address
-              </label>
-              <div className="mt-2">
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  required
-                  autoComplete="email"
-                  className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                />
-              </div>
-            </div>
+          <Box sx={{ textAlign: "center", mt: 2, color: "secondary.main" }}>
+            <Link to="/login">Already have an account? Sign in</Link>
+          </Box>
+        </Grid>
 
-            <div>
-              <label htmlFor="email" className="block text-sm/6 font-medium text-gray-900">
-                Email address
-              </label>
-              <div className="mt-2">
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  required
-                  autoComplete="email"
-                  className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                />
-              </div>
-            </div>
-
-            <div>
-              <label htmlFor="email" className="block text-sm/6 font-medium text-gray-900">
-                Email address
-              </label>
-              <div className="mt-2">
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  required
-                  autoComplete="email"
-                  className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                />
-              </div>
-            </div>
-
-            <div>
-              <label htmlFor="email" className="block text-sm/6 font-medium text-gray-900">
-                Email address
-              </label>
-              <div className="mt-2">
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  required
-                  autoComplete="email"
-                  className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                />
-              </div>
-            </div>
-
-            <div>
-              <div className="flex items-center justify-between">
-                <label htmlFor="password" className="block text-sm/6 font-medium text-gray-900">
-                  Password
-                </label>
-              </div>
-              <div className="mt-2">
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  required
-                  autoComplete="current-password"
-                  className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                />
-              </div>
-            </div>
-
-            <div>
-              <button
-                type="submit"
-                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              >
-                Sign in
-              </button>
-            </div>
-          </form>
-
-          <p className="mt-10 text-center text-sm/6 text-gray-500">
-            already have a account{" "}
-            <Link to='/login' className="font-semibold text-indigo-600 hover:text-indigo-500">
-              sign in here
-            </Link>
-          </p>
-        </div>
-      </div>
-    </>
+        <AuthImage image={image} />
+      </Grid>
+    </Container>
   );
 };
 
