@@ -1,14 +1,12 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-
-import { useSelector } from "react-redux";
 import axios from "axios";
-import { fetchFail, fetchStart, firmSuccess } from "../features/StockSlice";
+import { fetchFail, fetchStart, firmSuccess } from "../features/BlogSlice";
 
-const useStockCall = () => {
+const useBlogCall = () => {
   const dispatch = useDispatch();
   const BASE_URL = import.meta.env.VITE_BASE_URL;
-  const { token } = useSelector((state) => state.auth);
+  
 
   const getData = async (url) => {
     dispatch(fetchStart());
@@ -24,4 +22,4 @@ const useStockCall = () => {
   return { getData };
 };
 
-export default useStockCall;
+export default useBlogCall;
