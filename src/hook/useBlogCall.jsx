@@ -12,7 +12,7 @@ const useBlogCall = () => {
     dispatch(fetchStart());
     try {
       const { data } = await axios(`${BASE_URL}${url}`);
-      console.log(data);
+      
       dispatch(firmSuccess(data));
     } catch (error) {
       dispatch(fetchFail());
