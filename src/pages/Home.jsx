@@ -1,18 +1,15 @@
-
 import React, { useState } from "react";
-import useBlogCall from "../hook/useBlogCall";
+import useStockCall from "../hook/useStockCall";
 import { useEffect } from "react";
-
+import { useSelector } from "react-redux";
 
 const Home = () => {
-  const { getData } = useBlogCall();
-  const {}
-
+  const { getData } = useStockCall();
+  
 
   useEffect(() => {
     getData("blogs/");
   }, []);
-
 
   return <div>Home</div>;
 };
