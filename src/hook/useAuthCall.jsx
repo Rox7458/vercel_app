@@ -22,7 +22,7 @@ const useAuthCall = () => {
       console.log("data", data);
       dispatch(registerSuccess(data));
 
-      navigate("/dashboard");
+      navigate("/");
     } catch (error) {
       dispatch(fetchFail());
     }
@@ -33,9 +33,9 @@ const useAuthCall = () => {
     dispatch(fetchStart());
     try {
       const { data } = await axios.post(`${BASE_URL}auth/login`, userInfo);
-      console.log();
+      console.log("data", data);
       dispatch(loginSuccess(data));
-      navigate("/stock");
+      navigate("/");
     } catch (error) {
       dispatch(fetchFail());
     }

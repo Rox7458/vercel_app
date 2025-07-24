@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  Button,
   Disclosure,
   DisclosureButton,
   DisclosurePanel,
@@ -10,6 +11,8 @@ import {
 } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import useAuthCall from "../hook/useAuthCall";
 
 const navigation = [
   { name: "DASHBOARD", link: "dashboard" },
@@ -22,6 +25,11 @@ function classNames(...classes) {
 }
 
 const Navbar = () => {
+  const { loading } = useSelector((state) => state.auth);
+  const { logout } = useAuthCall;
+
+  console.log(loading);
+
   return (
     <div>
       <Disclosure as="nav" className="bg-gray-800">
@@ -77,35 +85,51 @@ const Navbar = () => {
                     />
                   </MenuButton>
                 </div>
-                <MenuItems
-                  transition
-                  className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 transition focus:outline-hidden data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in"
-                >
-                  <MenuItem>
-                    <Link
-                      to="/myblogs"
-                      className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
-                    >
-                      My Blogs
-                    </Link>
-                  </MenuItem>
-                  <MenuItem>
-                    <Link
-                      to="/profile"
-                      className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
-                    >
-                      Profile
-                    </Link>
-                  </MenuItem>
-                  <MenuItem>
-                    <Link
-                      to="/login"
-                      className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
-                    >
-                      Logout
-                    </Link>
-                  </MenuItem>
-                </MenuItems>
+                {loading ? (
+                  <MenuItems
+                    transition
+                    className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 transition focus:outline-hidden data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in"
+                  >
+                    <MenuItem>
+                      <Link
+                        to="/myblogs"
+                        className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
+                      >
+                        My Blogs
+                      </Link>
+                    </MenuItem>
+                    <MenuItem>
+                      <Link
+                        to="/profile"
+                        className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
+                      >
+                        Profile
+                      </Link>
+                    </MenuItem>
+                    <MenuItem>
+                      <Link
+                        to="/login"
+                        className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
+                      >
+                        Logout
+                      </Link>
+                    </MenuItem>
+                  </MenuItems>
+                ) : (
+                  <MenuItems
+                    transition
+                    className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 transition focus:outline-hidden data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in"
+                  >
+                    <MenuItem>
+                      <Link
+                        to="/login"
+                        className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
+                      >
+                        Login
+                      </Link>
+                    </MenuItem>
+                  </MenuItems>
+                )}
               </Menu>
             </div>
           </div>
