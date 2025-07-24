@@ -22,8 +22,7 @@ const Register = () => {
     firstName: Yup.string().min(2, "Too Short!").max(50, "Too Long!").required("Required"),
     lastName: Yup.string().min(2, "Too Short!").max(50, "Too Long!").required("Required"),
     email: Yup.string().email("Invalid email").required("Required"),
-    password: Yup.string()
-    .matches(/[a-z]/, "Password should include lowercase"),
+    password: Yup.string().matches(/[a-z]/, "Password should include lowercase"),
   });
 
   return (
@@ -69,6 +68,7 @@ const Register = () => {
             validationSchema={registerSchema}
             onSubmit={(values) => register(values)}
             component={(props) => <RegisterForm {...props} />}
+            
           />
 
           <Box sx={{ textAlign: "center", mt: 2, color: "secondary.main" }}>

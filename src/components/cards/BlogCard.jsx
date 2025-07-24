@@ -1,7 +1,7 @@
 import React from "react";
 
 const BlogCard = ({ blog }) => {
-  console.log(blog);
+  
   return (
     <div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
       <a href="#">
