@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 const useAuthCall = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { token } = useSelector((state) => state.auth);
+  const { token, loading } = useSelector((state) => state.auth);
 
   const BASE_URL = import.meta.env.VITE_BASE_URL;
 
@@ -31,6 +31,7 @@ const useAuthCall = () => {
   //!  LOGIN İŞLEMİ
   const login = async (userInfo) => {
     dispatch(fetchStart());
+    navigate("login");
     try {
       const { data } = await axios.post(`${BASE_URL}auth/login`, userInfo);
       console.log("data", data);

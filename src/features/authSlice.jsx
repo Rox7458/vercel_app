@@ -33,7 +33,6 @@ const authSlice = createSlice({
     logoutSuccess: (state) => {
       (state.token = null), (state.loading = false);
       state.currentUser = null;
-      console.log(state);
     },
   },
 });

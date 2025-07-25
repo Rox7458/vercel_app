@@ -7,6 +7,7 @@ import MyBlogs from "../pages/user_pages/MyBlogs";
 import Profile from "../pages/user_pages/Profile";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
+import BlogCardDetail from "../components/cards/BlogCardDetail";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
       {
         path: "/newblog",
         element: <NewBlog />,
+      },
+      {
+        path: "/blogcardetail",
+        element: <BlogCardDetail />,
       },
       {
         path: "/about",
