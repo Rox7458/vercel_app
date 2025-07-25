@@ -9,6 +9,7 @@ import useAuthCall from "../../hook/useAuthCall";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
+import { blogSuccess } from "../../features/BlogSlice";
 
 const BlogCard = ({ blog }) => {
   const dispatch = useDispatch();
@@ -18,7 +19,7 @@ const BlogCard = ({ blog }) => {
   //! BLOG DETAIL AUTH
   const blogDetailCheck = () => {
     if (loading) {
-      dispatch(blogSuccess());
+      dispatch(blogSuccess(blog));
       navigate("/blogcardetail");
     } else {
       navigate("/login");

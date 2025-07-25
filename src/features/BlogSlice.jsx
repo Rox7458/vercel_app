@@ -24,7 +24,7 @@ const blogSlice = createSlice({
     },
     blogSuccess: (state, { payload }) => {
       state.blog = payload.data;
-      console.log(data);
+      console.log(payload)
     },
   },
 });
