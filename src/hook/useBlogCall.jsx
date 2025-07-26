@@ -9,7 +9,7 @@ const useBlogCall = () => {
   const dispatch = useDispatch();
   const BASE_URL = import.meta.env.VITE_BASE_URL;
 
-  //! blog fetch data
+  //! FETCH BLOG DATA
   const getData = async (url) => {
     dispatch(fetchStart());
     navigate("/");
@@ -21,7 +21,20 @@ const useBlogCall = () => {
     }
   };
 
-  return { getData };
+  //! CREATE MEW BLOG
+
+  const createBlogData = async (url,info) => {
+    dispatch(fetchStart());
+    navigate("/newblog");
+
+    try {
+      const { data } = await post(url, info);
+    } catch (error) {
+      dispatch(fetchFail());
+    }
+  };
+
+  return { getData, createBlogData };
 };
 
 export default useBlogCall;

@@ -6,7 +6,7 @@ const blogSlice = createSlice({
     loading: false,
     error: false,
     blogs: [],
-    blog: [],
+    blogDetail: [],
   },
   reducers: {
     fetchStart: (state) => {
@@ -23,8 +23,8 @@ const blogSlice = createSlice({
       state.error = false;
     },
     blogSuccess: (state, { payload }) => {
-      state.blog = payload.data;
-      console.log(payload)
+      state.blogDetail = payload;
+      
     },
   },
 });

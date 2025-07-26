@@ -15,11 +15,13 @@ import AdbIcon from "@mui/icons-material/Adb";
 import useAuthCall from "../hook/useAuthCall";
 import { useSelector } from "react-redux";
 import useBlogCall from "../hook/useBlogCall";
+import { useNavigate } from "react-router-dom";
 
 function Navbar() {
   const { logout, login } = useAuthCall();
   const { getData } = useBlogCall();
   const { loading } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -37,6 +39,14 @@ function Navbar() {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+
+  const newBlogPage = () => {
+    if (loading) {
+      navigate("/newblog");
+    } else {
+      navigate("/login");
+    }
   };
 
   return (
@@ -92,7 +102,7 @@ function Navbar() {
               <MenuItem onClick={getData}>
                 <Typography sx={{ textAlign: "center" }}>DASHBOARD</Typography>
               </MenuItem>
-              <MenuItem onClick={handleCloseNavMenu}>
+              <MenuItem onClick={newBlogPage}>
                 <Typography sx={{ textAlign: "center" }}>NEW BLOG</Typography>
               </MenuItem>
               <MenuItem onClick={handleCloseNavMenu}>
@@ -123,7 +133,7 @@ function Navbar() {
             <Button ß onClick={getData} sx={{ my: 2, color: "white", display: "block" }}>
               DASHBOARD
             </Button>
-            <Button ß onClick={handleCloseNavMenu} sx={{ my: 2, color: "white", display: "block" }}>
+            <Button ß onClick={newBlogPage} sx={{ my: 2, color: "white", display: "block" }}>
               NEW BLOG
             </Button>
             <Button ß onClick={handleCloseNavMenu} sx={{ my: 2, color: "white", display: "block" }}>
